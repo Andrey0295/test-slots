@@ -1,0 +1,11 @@
+body{
+    background-color: rosybrown;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+canvas{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
