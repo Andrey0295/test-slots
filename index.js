@@ -243,7 +243,7 @@ app.ticker.add(delta => startFirstSlot(delta));
           secondSlotAnimation = false;
           // console.log(imagesSprite1.tilePosition.y)
           
-        }, 1500);
+        }, 700);
         }
 
 
@@ -261,25 +261,32 @@ app.ticker.add(delta => startFirstSlot(delta));
           btnContainer.interactive = true;
           btnContainer.removeChild(disableButton)
           
-          // console.log(imagesSprite0.tilePosition.y)
-          // console.log(imagesSprite1.tilePosition.y)
-          // console.log(imagesSprite2.tilePosition.y)
-         
 
-
-          if(imagesSprite0.tilePosition.y === imagesSprite1.tilePosition.y && imagesSprite1.tilePosition.y === imagesSprite2.tilePosition.y,
-            imagesSprite0.tilePosition.y === imagesSprite1.tilePosition.y && imagesSprite2.tilePosition.y ===300,
-            imagesSprite0.tilePosition.y ===300 && imagesSprite1.tilePosition.y === imagesSprite2.tilePosition.y,
-            imagesSprite0.tilePosition.y === imagesSprite2.tilePosition.y && imagesSprite1.tilePosition.y ===300) {
-            console.log("!!!!!!!WOOON");
-            hasMoney +=20;
-             moneyText.text = `money: ${hasMoney}`;
+          if(imagesSprite0.tilePosition.y === imagesSprite1.tilePosition.y && imagesSprite1.tilePosition.y === imagesSprite2.tilePosition.y){
+            letWin();
           }
 
-          
+          if(imagesSprite0.tilePosition.y === imagesSprite1.tilePosition.y && imagesSprite2.tilePosition.y ===300){
+            letWin();
+          }
 
+          if(imagesSprite0.tilePosition.y === 300 && imagesSprite1.tilePosition.y === imagesSprite2.tilePosition.y){
+            letWin();
+          }
+
+          if(imagesSprite0.tilePosition.y === imagesSprite2.tilePosition.y && imagesSprite1.tilePosition.y ===300){
+            letWin();
+          }
+
+        
+          function letWin(){
+            console.log("!!!!!!!WOOON");
+            hasMoney +=20;
+            moneyText.text = `money: ${hasMoney}`;
+
+          }
           
-        }, 2000);
+        }, 1000);
         }
 
 
