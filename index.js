@@ -2,12 +2,12 @@
 
 
 const app = new PIXI.Application({
-    width: 1024, height: 480, backgroundColor: 0x1099bb, resolution: window.devicePixelRatio || 1,
+    width: 1024, height: 480, backgroundColor: 0x111111, resolution: window.devicePixelRatio || 1,
 });
 
 document.body.appendChild(app.view);
 
-const appView = document.body.appendChild(app.view);
+let appView = document.body.appendChild(app.view);
 
 
 
@@ -15,7 +15,20 @@ const appView = document.body.appendChild(app.view);
 PIXI.loader
   .add("bg" , "./images/BG.png")
   .add("imagesSprite0" , "./images/sprite.png")
+  .add("activeButton" , "./images/BTN_Spin.png")
+  .on("progress" , loadProgressHandler)
   .load(setup);
+
+  function loadProgressHandler() {
+    console.log('LOADING....')
+    app.renderer.backgroundColor = 0x111111;
+
+    
+    
+  }
+//   let message = new Text("Hello Pixi!");
+// app.stage.addChild(message);
+ 
 
 
 let positions = [0, 120, 300, 470, 640, 800, 920];
@@ -59,46 +72,95 @@ function setup() {
   imagesSprite2.position.x = 590;
   imagesSprite2.tilePosition.y = 920;
 
-
-
   app.stage.addChild(imagesSprite2);
 
+  let activeButton = new PIXI.Sprite(pixiLoader.activeButton.texture);
+  activeButton.width = 125;
+  activeButton.height = 125;
+  activeButton.position.x = 870;
+  activeButton.position.y = 180;
+ 
+  
+  // app.stage.addChild(activeButton);
+
+  let btnContainer = new PIXI.Container();
+  btnContainer.addChild(activeButton);
+  app.stage.addChild(btnContainer);
+  btnContainer.interactive = true;
+
+  
+
+
+  
+
+//   var mouseIn = false;
+// graphics.on("mouseover", function(e) {
+//   console.log("over")
+//   mouseIn = true;
+// });
+
+  
 
 
 
 
 
-  // Animation for first slot...
 
-  let firstSlotAnimation = true;
-  app.ticker.add(delta => startFirstSlot(delta));
+function onClick(e){
+  
+  console.log('we are cath click')
+}
 
+
+
+
+
+
+// Animation for first slot...
+
+let firstSlotAnimation = false;
+app.ticker.add(delta => startFirstSlot(delta));
+
+btnContainer.on("click", firstStartAnimation)
 
   function startFirstSlot(delta){
 
     if(firstSlotAnimation){
+      
       imagesSprite0.tilePosition.y = positions[randomInt(0, 6)];
     }
     
   }
 
-  setTimeout(() => {
-    firstSlotStopAnimation()
-    console.log(imagesSprite0.tilePosition.y)
+  // setTimeout(() => {
+  //   firstSlotStopAnimation()
+  //   console.log(imagesSprite0.tilePosition.y)
     
-  }, 3000);
+  // }, 3000);
 
-      function firstSlotStopAnimation(){
-         firstSlotAnimation = false;
-        }
+       
+       function firstStartAnimation(){
+         firstSlotAnimation = true;
+         setTimeout(() => {
+          firstSlotAnimation = false;
+          console.log(imagesSprite0.tilePosition.y)
+          
+        }, 3000);
+       }
+
+      // function firstSlotStopAnimation(){
+      //    firstSlotAnimation = false;
+      //   }
 
 
 
 
   // Animation for second slot....
 
-  let secondSlotAnimation = true;
+  let secondSlotAnimation = false;
   app.ticker.add(delta => startSecondSlot(delta));
+
+  btnContainer.on("click", secondSlotStartAnimation);
 
   function startSecondSlot(delta){
 
@@ -108,14 +170,16 @@ function setup() {
     
   }
 
-  setTimeout(() => {
-    secondSlotStopAnimation();
-    console.log(imagesSprite1.tilePosition.y)
-    
-  }, 4000);
+  
 
-      function secondSlotStopAnimation(){
-        secondSlotAnimation = false;
+      function secondSlotStartAnimation(){
+        secondSlotAnimation = true;
+
+        setTimeout(() => {
+          secondSlotAnimation = false;
+          console.log(imagesSprite1.tilePosition.y)
+          
+        }, 4000);
         }
 
 
@@ -123,8 +187,10 @@ function setup() {
   // Animation for third slot......
 
 
-  let thirdSlotAnimation = true;
+  let thirdSlotAnimation = false;
   app.ticker.add(delta => startThirdSlot(delta));
+
+  btnContainer.on("click", thirdSlotStartAnimation);
 
   function startThirdSlot(delta){
 
@@ -134,14 +200,16 @@ function setup() {
     
   }
 
-  setTimeout(() => {
-    thirdSlotStopAnimation();
-    console.log(imagesSprite2.tilePosition.y)
-    
-  }, 5000);
 
-      function thirdSlotStopAnimation(){
-        thirdSlotAnimation = false;
+
+      function thirdSlotStartAnimation(){
+        thirdSlotAnimation = true;
+
+        setTimeout(() => {
+          thirdSlotAnimation = false;
+          console.log(imagesSprite2.tilePosition.y)
+          
+        }, 5000);
         }
 
 
@@ -151,6 +219,8 @@ function setup() {
      
 
 }
+
+
 
 
 
