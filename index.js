@@ -16,6 +16,7 @@ PIXI.loader
   .add("bg" , "./images/BG.png")
   .add("imagesSprite0" , "./images/sprite.png")
   .add("activeButton" , "./images/BTN_Spin.png")
+  .add("disableButton", "./images/BTN_Spin_d.png")
   .on("progress" , loadProgressHandler)
   .load(setup);
 
@@ -79,14 +80,27 @@ function setup() {
   activeButton.height = 125;
   activeButton.position.x = 870;
   activeButton.position.y = 180;
- 
-  
+
+
+
+  let disableButton = new PIXI.Sprite(pixiLoader.disableButton.texture);
+  disableButton.width = 125;
+  disableButton.height = 125;
+  disableButton.position.x = 870;
+  disableButton.position.y = 180;
+
   // app.stage.addChild(activeButton);
 
   let btnContainer = new PIXI.Container();
+
   btnContainer.addChild(activeButton);
+  
   app.stage.addChild(btnContainer);
+
   btnContainer.interactive = true;
+  btnContainer.buttonMode = true;
+
+ 
 
   
 
@@ -132,11 +146,7 @@ btnContainer.on("click", firstStartAnimation)
     
   }
 
-  // setTimeout(() => {
-  //   firstSlotStopAnimation()
-  //   console.log(imagesSprite0.tilePosition.y)
-    
-  // }, 3000);
+  
 
        
        function firstStartAnimation(){
@@ -148,9 +158,7 @@ btnContainer.on("click", firstStartAnimation)
         }, 3000);
        }
 
-      // function firstSlotStopAnimation(){
-      //    firstSlotAnimation = false;
-      //   }
+     
 
 
 
@@ -204,9 +212,13 @@ btnContainer.on("click", firstStartAnimation)
 
       function thirdSlotStartAnimation(){
         thirdSlotAnimation = true;
+        btnContainer.interactive = false;
+        btnContainer.addChild(disableButton);
 
         setTimeout(() => {
           thirdSlotAnimation = false;
+          btnContainer.interactive = true;
+          btnContainer.removeChild(disableButton)
           console.log(imagesSprite2.tilePosition.y)
           
         }, 5000);
