@@ -226,7 +226,7 @@ app.ticker.add(delta => startFirstSlot(delta));
           firstSlotAnimation = false;
           // console.log(imagesSprite0.tilePosition.y)
           
-        }, 1000);
+        }, 1500);
        }
 
      
@@ -243,7 +243,7 @@ app.ticker.add(delta => startFirstSlot(delta));
           secondSlotAnimation = false;
           // console.log(imagesSprite1.tilePosition.y)
           
-        }, 700);
+        }, 2500);
         }
 
 
@@ -286,7 +286,7 @@ app.ticker.add(delta => startFirstSlot(delta));
 
           }
           
-        }, 1000);
+        }, 3500);
         }
 
 
