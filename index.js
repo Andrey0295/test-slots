@@ -135,7 +135,9 @@ function onClick(e){
 let firstSlotAnimation = false;
 app.ticker.add(delta => startFirstSlot(delta));
 
-btnContainer.on("click", firstStartAnimation)
+btnContainer.on("click", firstStartAnimation);
+btnContainer.on("touchstart", firstStartAnimation);
+
 
   function startFirstSlot(delta){
 
@@ -169,6 +171,7 @@ btnContainer.on("click", firstStartAnimation)
   app.ticker.add(delta => startSecondSlot(delta));
 
   btnContainer.on("click", secondSlotStartAnimation);
+  btnContainer.on("touchstart", secondSlotStartAnimation );
 
   function startSecondSlot(delta){
 
@@ -199,6 +202,7 @@ btnContainer.on("click", firstStartAnimation)
   app.ticker.add(delta => startThirdSlot(delta));
 
   btnContainer.on("click", thirdSlotStartAnimation);
+  btnContainer.on("touchstart", thirdSlotStartAnimation );
 
   function startThirdSlot(delta){
 
