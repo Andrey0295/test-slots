@@ -67,8 +67,7 @@ function setup() {
   
   app.stage.addChild(bg);
 
-
-  // Add Text///////////////////
+  // Add money-text and money-text container///////////////////
   let hasMoney = 1000;
   
   let moneyTextStyle = new PIXI.TextStyle({
@@ -101,12 +100,9 @@ function setup() {
 
 
 
-//     let loadingMessage = new PIXI.Text("Loading/////////");
-// app.stage.addChild(loadingMessage);
-
 
 // Images sprites for slots///////////////
-// let positions = [0, 120, 300, 470, 640, 800, 920];
+
   let imagesSprite0 = new PIXI.TilingSprite(pixiLoader.imagesSprite0.texture, 235 , 930 );
   imagesSprite0.position.x = 70 ;
   imagesSprite0.tilePosition.y = 0;
@@ -155,6 +151,35 @@ function setup() {
 
   btnContainer.interactive = true;
   btnContainer.buttonMode = true;
+
+
+    // add "YOU WON" Container///////////////////
+
+    let youWonRectangle = new PIXI.Graphics();
+    youWonRectangle.beginFill(0x1B4F72  );
+    youWonRectangle.drawRect(80, 50, 755, 400);
+    youWonRectangle.alpha = 0.8;
+  
+    let youWonTextStyle = new PIXI.TextStyle({
+      fontFamily: "Redressed",
+      fontSize: 92,
+      fill: "yellow",
+    })
+  
+    let youWonText = new PIXI.Text("YOU WON!", youWonTextStyle);
+    youWonText.position.x = 220;
+    youWonText.position.y = 175;
+
+    let youWonContainer = new PIXI.Container();
+
+    youWonContainer.addChild(youWonRectangle);
+    youWonContainer.addChild(youWonText);
+
+    // app.stage.addChild(youWonContainer);
+
+
+
+  // app.stage.addChild(youWonRectangle);
 
  
 
@@ -278,11 +303,18 @@ app.ticker.add(delta => startFirstSlot(delta));
             letWin();
           }
 
+
         
           function letWin(){
             console.log("!!!!!!!WOOON");
             hasMoney +=20;
             moneyText.text = `money: ${hasMoney}`;
+
+            app.stage.addChild(youWonContainer);
+            setTimeout(() => {
+              app.stage.removeChild(youWonContainer)
+              
+            }, 2000);
 
           }
           
